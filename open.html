@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Opening app…</title>
+	</head>
+	<body>
+		<script>
+			var jumped = false;
+			document.addEventListener("visibilitychange", function () {
+			  if (document.hidden) {
+			    jumped = true;
+			  }
+			});
+			// 兼容部分浏览器
+			window.addEventListener("pagehide", function () { jumped = true; });
+			window.addEventListener("blur", function () { jumped = true; });
+			function start(){
+				var playUrl = "https://raw.githubusercontent.com/w59972932-jpg/test/refs/heads/master/app-release.apk?deep_link_value=active3&deep_link_sub1=11&deep_link_sub2=12&af_force_deeplink=true&af_xp=custom&pid=linktest";
+				var appUrl = "https://www.dinerofast.net?deep_link_value=active3&deep_link_sub1=11&deep_link_sub2=12&af_force_deeplink=true&af_xp=custom&pid=linktest";
+				setTimeout(function () {
+				    if (!jumped) {
+				      location.href = playUrl;
+				    }
+				  }, 2000);
+				location.href = appUrl;
+			}
+
+			function startScheme(){
+				var playUrl = "https://raw.githubusercontent.com/w59972932-jpg/test/refs/heads/master/app-release.apk?deep_link_value=active3&deep_link_sub1=11&deep_link_sub2=12&af_force_deeplink=true&af_xp=custom&pid=linktest";
+				var appUrl = "myapplink://open?af_force_deeplink=true&af_xp=custom&pid=linktest&deep_link_value=active5&deep_link_sub1=11&deep_link_sub2=12";
+				setTimeout(function () {
+				    if (!jumped) {
+				      location.href = playUrl;
+				    }
+				  }, 2000);
+				location.href = appUrl;
+			}
+
+			function startScheme2(){
+				var appUrl = "homecredit://honourtheory?af_force_deeplink=true&af_xp=custom&pid=linktest&deep_link_value=active5&deep_link_sub1=11&deep_link_sub2=12";
+				location.href = appUrl;
+			}
+		</script>
+
+
+		<h1><a href="https://1-onelinktest.onelink.me/ihlY?af_force_deeplink=true&af_xp=custom&pid=linktest&deep_link_value=active&deep_link_sub1=11">open link appsflyer>>>>></a></h1>
+		<h1><a onclick="start()">open link2 web>>>>></a></h1>
+		<h1><a onclick="startScheme()">open link3 scheme>>>>></a></h1>
+		<h1><a onclick="startScheme2()">open MoneyTap scheme>>>>></a></h1>
+	</body>
+</html>
