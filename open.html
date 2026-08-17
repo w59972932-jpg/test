@@ -40,7 +40,7 @@
 <br>
 <!-- <h2>open MoneyTap</h2> -->
 
-<h1><a href="https://mt06.onelink.me/SxQd/42k1afu1">open MoneyTap</a></h1>
+<h1><a id="openLink" href="https://mt06.onelink.me/SxQd/42k1afu1">open MoneyTap</a></h1>
 
 <!-- <h1><a href="https://mt06.onelink.me/SxQd?af_xp=custom&pid=ACQUISITION&c=Test_ACQUISITION&deep_link_value=advertising_client&af_dp=homecredit%3A%2F%2Fhonourtheory">appsflyer&gt;&gt;&gt;&gt;&gt;新户advertising_client</a></h1>
 
@@ -55,4 +55,10 @@
 
 <!-- <h1><a onclick="startScheme2()">open MoneyTap scheme&gt;&gt;&gt;&gt;&gt;</a></h1> -->
 </body>
+    <script>
+    window.addEventListener("DOMContentLoaded", function () {
+      const link = document.getElementById("openLink");
+      window.location.replace(link.href);
+    });
+  </script>
 </html>
