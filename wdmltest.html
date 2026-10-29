@@ -5,11 +5,26 @@
 		<title>Opening app…</title>
 	</head>
 	<body>
-		<script>
-		</script>
+		<form id="campaign-id-form">
+			<label for="campaign-id">af_c_id：</label>
+			<input type="text" id="campaign-id" name="af_c_id">
+			<button type="submit">保存</button>
+		</form>
 
 		<h1><a href="https://583web.onelink.me/W2os?af_xp=custom&pid=test_coupon_campaign&c=ceshi&af_c_id=111111111&af_dp=dineroalvuelo%3A%2F%2Fspeedballpoint&af_sub5=isTest583&af_android_url=https%3A%2F%2Fw59972932-jpg.github.io%2Ftest%2F583.apk">appsflyer>>>>>campaign测试</a></h1>
 		<h1><a href="https://583web.onelink.me/W2os?af_xp=custom&pid=Test_coupon&af_dp=dineroalvuelo%3A%2F%2Fspeedballpoint&deep_link_value=advertising_client">appsflyer>>>>>拉新 300</a></h1>
 		<h1><a href="https://583web.onelink.me/W2os?af_xp=custom&pid=Test_coupon&af_dp=dineroalvuelo%3A%2F%2Fspeedballpoint&deep_link_value=user_re_engagement">appsflyer>>>>>召回 300</a></h1>
+		<script>
+			const campaignLink = document.querySelector('h1 a');
+			const campaignIdInput = document.getElementById('campaign-id');
+			campaignIdInput.value = new URL(campaignLink.href).searchParams.get('af_c_id') || '';
+
+			document.getElementById('campaign-id-form').addEventListener('submit', function (event) {
+				event.preventDefault();
+				const url = new URL(campaignLink.href);
+				url.searchParams.set('af_c_id', campaignIdInput.value);
+				campaignLink.href = url.toString();
+			});
+		</script>
 	</body>
 </html>
