@@ -58,15 +58,17 @@
 		<h1><a href="https://583web.onelink.me/W2os?af_xp=custom&pid=Test_coupon&af_dp=dineroalvuelo%3A%2F%2Fspeedballpoint&deep_link_value=advertising_client">appsflyer>>>>>拉新 300</a></h1>
 		<h1><a href="https://583web.onelink.me/W2os?af_xp=custom&pid=Test_coupon&af_dp=dineroalvuelo%3A%2F%2Fspeedballpoint&deep_link_value=user_re_engagement">appsflyer>>>>>召回 300</a></h1>
 		<script>
-			const campaignLink = document.querySelector('h1 a');
+			const campaignLinks = document.querySelectorAll('h1 a[href*="af_c_id="]');
 			const campaignIdInput = document.getElementById('campaign-id');
-			campaignIdInput.value = new URL(campaignLink.href).searchParams.get('af_c_id') || '';
+			campaignIdInput.value = new URL(campaignLinks[0].href).searchParams.get('af_c_id') || '';
 
 			document.getElementById('campaign-id-form').addEventListener('submit', function (event) {
 				event.preventDefault();
-				const url = new URL(campaignLink.href);
-				url.searchParams.set('af_c_id', campaignIdInput.value);
-				campaignLink.href = url.toString();
+				campaignLinks.forEach(function (campaignLink) {
+					const url = new URL(campaignLink.href);
+					url.searchParams.set('af_c_id', campaignIdInput.value);
+					campaignLink.href = url.toString();
+				});
 			});
 		</script>
 	</body>
