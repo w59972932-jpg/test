@@ -22,6 +22,7 @@
 			}
 
 			#campaign-id,
+			#campaign-name,
 			#campaign-id-form button {
 				box-sizing: border-box;
 				width: 100%;
@@ -30,7 +31,8 @@
 				border-radius: 6px;
 			}
 
-			#campaign-id {
+			#campaign-id,
+			#campaign-name {
 				min-height: 56px;
 				font-size: 20px;
 			}
@@ -50,6 +52,8 @@
 		<form id="campaign-id-form">
 			<label for="campaign-id">af_c_id：</label>
 			<input type="text" id="campaign-id" name="af_c_id">
+			<label for="campaign-name">c：</label>
+			<input type="text" id="campaign-name" name="c">
 			<button type="submit">保存</button>
 		</form>
 
@@ -60,13 +64,17 @@
 		<script>
 			const campaignLinks = document.querySelectorAll('h1 a[href*="af_c_id="]');
 			const campaignIdInput = document.getElementById('campaign-id');
-			campaignIdInput.value = new URL(campaignLinks[0].href).searchParams.get('af_c_id') || '';
+			const campaignNameInput = document.getElementById('campaign-name');
+			const campaignParams = new URL(campaignLinks[0].href).searchParams;
+			campaignIdInput.value = campaignParams.get('af_c_id') || '';
+			campaignNameInput.value = campaignParams.get('c') || '';
 
 			document.getElementById('campaign-id-form').addEventListener('submit', function (event) {
 				event.preventDefault();
 				campaignLinks.forEach(function (campaignLink) {
 					const url = new URL(campaignLink.href);
 					url.searchParams.set('af_c_id', campaignIdInput.value);
+					url.searchParams.set('c', campaignNameInput.value);
 					campaignLink.href = url.toString();
 				});
 			});
