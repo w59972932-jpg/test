@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>链接跳转测试</title>
+    <style>
+      * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+      body { margin: 0; padding: 48px 20px; background: #f5f6f8; color: #222; font-family: Arial, "Microsoft YaHei", sans-serif; }
+      main { width: 100%; max-width: 420px; margin: 0 auto; }
+      h1 { margin: 0 0 28px; font-size: 22px; }
+      label { display: block; margin-bottom: 10px; font-size: 16px; }
+      input { display: block; width: 100%; height: 48px; padding: 0 12px; border: 1px solid #cbd0d8; border-radius: 8px; background: #fff; color: #222; font-size: 16px; }
+      input:focus { outline: 2px solid #2563eb; outline-offset: 2px; }
+      button { display: block; width: 100%; min-height: 48px; margin-top: 20px; padding: 12px; border: 0; border-radius: 8px; background: #2563eb; color: #fff; font-size: 16px; cursor: pointer; }
+      button:active { background: #1d4ed8; }
+      .error { min-height: 20px; margin: 12px 0 0; color: #c62828; font-size: 14px; line-height: 20px; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>链接跳转测试</h1>
+      <form id="jump-form" novalidate>
+        <label for="target-url">网络地址</label>
+        <input id="target-url" name="url" type="url" placeholder="https://example.com" autocomplete="url" autocapitalize="off" autocorrect="off" spellcheck="false" aria-describedby="error-message">
+        <button type="submit">跳转</button>
+        <p id="error-message" class="error" role="alert"></p>
+      </form>
+    </main>
+    <script>
+      (function () {
+        var form = document.getElementById('jump-form');
+        var input = document.getElementById('target-url');
+        var message = document.getElementById('error-message');
+
+        input.addEventListener('input', function () {
+          message.textContent = '';
+          input.removeAttribute('aria-invalid');
+        });
+
+        form.addEventListener('submit', function (event) {
+          event.preventDefault();
+          var address = input.value.replace(/^\s+|\s+$/g, '');
+          var target;
+
+          try {
+            if (!/^https?:\/\//i.test(address)) throw new Error('Invalid URL');
+            target = new URL(address);
+            if (!target.hostname) throw new Error('Invalid URL');
+          } catch (error) {
+            message.textContent = address ? '请输入以 http:// 或 https:// 开头的有效网址。' : '请输入网络地址。';
+            input.setAttribute('aria-invalid', 'true');
+            return;
+          }
+
+          window.location.href = target.href;
+        });
+      })();
+    </script>
+  </body>
+</html>
